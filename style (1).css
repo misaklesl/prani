@@ -1,0 +1,214 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f0fafa;
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+#hint {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Door frame */
+.door-frame {
+  width: 260px;
+  height: 360px;
+  border: 5px solid #0a7a7a;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  background: #0d9e9e;
+  perspective: 900px;
+}
+
+/* Door panel (the moving door) */
+.door-panel {
+  width: 100%;
+  height: 100%;
+  background: #11b5b5;
+  border-radius: 2px 2px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.door-panel.open {
+  transform: perspective(900px) rotateY(-110deg);
+}
+
+.door-panel-inner {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  height: calc(100% - 32px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.door-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.door-star {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.door-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e0fafa;
+  text-align: center;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.door-knob {
+  width: 18px;
+  height: 18px;
+  background: #f0d060;
+  border-radius: 50%;
+  border: 2px solid #c8a820;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Card content (revealed when door opens) */
+.card-content {
+  width: 260px;
+  height: 360px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 20px;
+  background: linear-gradient(160deg, #fff9f0 0%, #fdebd0 100%);
+  border-radius: 2px 2px 0 0;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.3s;
+  pointer-events: none;
+}
+
+.card-content.visible {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.confetti-emoji {
+  font-size: 30px;
+  animation: bounce 1.2s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+.recipient {
+  font-size: 20px;
+  font-weight: 500;
+  color: #0a7a7a;
+}
+
+.main-wish {
+  font-size: 19px;
+  font-weight: 500;
+  color: #8b3a0f;
+  line-height: 1.35;
+}
+
+.tagline {
+  font-size: 15px;
+  color: #a05a2c;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.from-badge {
+  font-size: 13px;
+  color: #0a7a7a;
+  border: 1px solid #a0dede;
+  border-radius: 20px;
+  padding: 5px 16px;
+  background: #e8fafa;
+}
+
+/* Confetti */
+.confetti-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cc {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  opacity: 0;
+}
+
+/* Keyboard hint */
+#key-hint {
+  margin-top: 1.5rem;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+.key-badge {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 12px;
+  color: #555;
+  background: #f5f5f5;
+  margin: 0 2px;
+}
